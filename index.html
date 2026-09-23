@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>SPACEWAR! 2026 — United States Space Force Edition</title>
+  <meta name="description" content="A 2026 remake of the 1962 PDP-1 Spacewar! with AI weapons, Guardian drones, and a multi-planetary Space Force campaign." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div id="stage">
+    <canvas id="c"></canvas>
+    <div class="letterbox top"></div>
+    <div class="letterbox bot"></div>
+
+    <div class="overlay">
+      <div class="topbar">
+        <div>
+          <div class="brand">UNITED STATES SPACE FORCE</div>
+          <div class="meta" id="theater">SF-00  ·  FLAG DECK</div>
+        </div>
+        <div class="meta" id="ticker">SPACEWAR! 2026  ·  HIGH GROUND</div>
+      </div>
+      <div class="bottombar">
+        <div class="hud-card">
+          <h4>Gold Eagle  ·  P1</h4>
+          <div>Integrity</div><div class="bar hp"><i id="p1hp" style="width:100%"></i></div>
+          <div>Fuel</div><div class="bar"><i id="p1fuel" style="width:100%"></i></div>
+          <div>AEGIS heat</div><div class="bar heat"><i id="p1heat" style="width:0%"></i></div>
+        </div>
+        <div class="hud-card">
+          <h4>Crimson Wedge  ·  P2 / AI</h4>
+          <div>Integrity</div><div class="bar hp"><i id="p2hp" style="width:100%"></i></div>
+          <div>Fuel</div><div class="bar"><i id="p2fuel" style="width:100%"></i></div>
+          <div>AEGIS heat</div><div class="bar heat"><i id="p2heat" style="width:0%"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boot" id="boot">
+      <div class="line">Department of the Air Force</div>
+      <div class="line">United States Space Force</div>
+      <div class="line">Exercise file  ·  2026</div>
+      <div class="line">SPACEWAR!</div>
+      <div class="line">The high ground</div>
+    </div>
+
+    <div class="center-stack">
+      <div class="panel" id="menu">
+        <div class="kicker">Public-domain lineage  ·  1962 PDP-1</div>
+        <h1>SPACEWAR!</h1>
+        <div class="sub">2026  ·  Space Force Edition</div>
+        <p class="story">
+          Two ships. One well. Sixty-four years after Steve Russell and the Hingham Institute
+          put war on a CRT, the duel is back as a United States Space Force exercise —
+          AI beams, Sentinel drones, five planets.
+        </p>
+        <div class="actions">
+          <button id="btn-campaign">Operation HIGH GROUND</button>
+          <button id="btn-duel-ai">Duel vs Guardian AI</button>
+          <button id="btn-duel-p2">Local two-pilot duel</button>
+        </div>
+        <p class="story" style="font-size:13px;color:#8b93a7">
+          P1: WASD thrust/turn · Space/F torpedo · E beam · Q drone · S hyperspace<br />
+          P2: IJKL · K fire · O beam · U drone · M hyperspace
+        </p>
+      </div>
+
+      <div class="panel hidden" id="brief">
+        <div class="kicker">Mission brief</div>
+        <h1 id="brief-title" style="font-size:32px">SF-01</h1>
+        <p class="story" id="brief-body"></p>
+        <div class="actions">
+          <button id="btn-launch">Launch Gold Eagle</button>
+          <button id="btn-back">Flag deck</button>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="end">
+        <div class="kicker">After-action</div>
+        <h1 id="end-title" style="font-size:32px"></h1>
+        <p class="story" id="end-body"></p>
+        <div class="actions">
+          <button id="next-mission">Next theater</button>
+          <button id="btn-retry">Re-run theater</button>
+          <button id="btn-menu">Flag deck</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/game.js"></script>
+</body>
+</html>
