@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
   <title>SPACEWAR! 2026 — United States Space Force Edition</title>
-  <meta name="description" content="A 2026 remake of the 1962 PDP-1 Spacewar! with AI weapons, Guardian drones, and a multi-planetary Space Force campaign." />
+  <meta name="description" content="1962 PDP-1 Spacewar remake. Multi-touch claw controls, AI weapons, Sentinel drones, five-theater campaign." />
+  <meta name="theme-color" content="#050816" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="SPACEWAR! 2026" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/icons/icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet" />
@@ -15,7 +23,6 @@
     <canvas id="c"></canvas>
     <div class="letterbox top"></div>
     <div class="letterbox bot"></div>
-
     <div class="overlay">
       <div class="topbar">
         <div>
@@ -39,7 +46,17 @@
         </div>
       </div>
     </div>
-
+    <div id="touch-layer">
+      <div class="stick" id="stick-move"><div class="knob" id="stick-move-knob"></div><div class="label">MOVE</div></div>
+      <div class="stick" id="stick-aim"><div class="knob" id="stick-aim-knob"></div><div class="label">AIM / SCOPE</div></div>
+      <div class="pad-col">
+        <button class="pad-btn" id="btn-scope" type="button">Scope</button>
+        <button class="pad-btn" id="btn-hyper" type="button">Hyper</button>
+        <button class="pad-btn" id="btn-drone" type="button">Drone</button>
+        <button class="pad-btn" id="btn-beam" type="button">Beam</button>
+        <button class="pad-btn fire" id="btn-fire" type="button">Fire</button>
+      </div>
+    </div>
     <div class="boot" id="boot">
       <div class="line">Department of the Air Force</div>
       <div class="line">United States Space Force</div>
@@ -47,28 +64,24 @@
       <div class="line">SPACEWAR!</div>
       <div class="line">The high ground</div>
     </div>
-
     <div class="center-stack">
       <div class="panel" id="menu">
         <div class="kicker">Public-domain lineage  ·  1962 PDP-1</div>
         <h1>SPACEWAR!</h1>
         <div class="sub">2026  ·  Space Force Edition</div>
-        <p class="story">
-          Two ships. One well. Sixty-four years after Steve Russell and the Hingham Institute
-          put war on a CRT, the duel is back as a United States Space Force exercise —
-          AI beams, Sentinel drones, five planets.
-        </p>
+        <p class="story">Two ships. One well. Multi-touch claw deck — move, aim, scope, and fire at the same time. Add to Home Screen on iPhone or Android.</p>
         <div class="actions">
           <button id="btn-campaign">Operation HIGH GROUND</button>
           <button id="btn-duel-ai">Duel vs Guardian AI</button>
           <button id="btn-duel-p2">Local two-pilot duel</button>
+          <button id="btn-install">Install on this phone</button>
         </div>
         <p class="story" style="font-size:13px;color:#8b93a7">
-          P1: WASD thrust/turn · Space/F torpedo · E beam · Q drone · S hyperspace<br />
-          P2: IJKL · K fire · O beam · U drone · M hyperspace
+          Phone claw: left stick rotate/thrust · right stick aim/scope · FIRE / BEAM / DRONE / HYPER<br />
+          Pinch to zoom. Hold SCOPE to tighten the well.<br />
+          Keyboard P1: WASD · Space/F · E · Q · S &nbsp;|&nbsp; P2: IJKL · K · O · U · M
         </p>
       </div>
-
       <div class="panel hidden" id="brief">
         <div class="kicker">Mission brief</div>
         <h1 id="brief-title" style="font-size:32px">SF-01</h1>
@@ -78,7 +91,6 @@
           <button id="btn-back">Flag deck</button>
         </div>
       </div>
-
       <div class="panel hidden" id="end">
         <div class="kicker">After-action</div>
         <h1 id="end-title" style="font-size:32px"></h1>
@@ -92,5 +104,19 @@
     </div>
   </div>
   <script src="js/game.js"></script>
+  <script src="js/touch.js"></script>
+  <script>
+    let deferredInstall = null;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault(); deferredInstall = e;
+      document.getElementById("btn-install").classList.add("show");
+    });
+    document.getElementById("btn-install").addEventListener("click", async () => {
+      if (!deferredInstall) return;
+      deferredInstall.prompt(); await deferredInstall.userChoice;
+      deferredInstall = null;
+      document.getElementById("btn-install").classList.remove("show");
+    });
+  </script>
 </body>
 </html>
