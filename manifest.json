@@ -1,0 +1,20 @@
+{
+  "name": "SPACEWAR! 2026 — Space Force Edition",
+  "short_name": "SPACEWAR! 2026",
+  "description": "1962 PDP-1 Spacewar remake. Multi-touch claw controls, AI weapons, Sentinel drones, five-theater campaign.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050816",
+  "theme_color": "#050816",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
